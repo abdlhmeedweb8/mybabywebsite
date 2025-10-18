@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقع خاص بروحي</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+            overflow: hidden;
+            font-family: "Tajawal", sans-serif;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        /* شكل القلب */
+        .heart-btn {
+            position: relative;
+            width: 100px;
+            height: 90px;
+            background-color: #ff1e56;
+            transform: rotate(-45deg);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            animation: pulse 1.5s infinite;
+            box-shadow: 0 0 20px rgba(255, 0, 85, 0.5);
+            z-index: 2;
+        }
+
+        .heart-btn::before,
+        .heart-btn::after {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 90px;
+            background-color: #ff1e56;
+            border-radius: 50%;
+        }
+
+        .heart-btn::before {
+            top: -50px;
+            left: 0;
+        }
+
+        .heart-btn::after {
+            left: 50px;
+            top: 0;
+        }
+
+        /* نبض القلب */
+        @keyframes pulse {
+            0% { transform: rotate(-45deg) scale(1); }
+            50% { transform: rotate(-45deg) scale(1.15); }
+            100% { transform: rotate(-45deg) scale(1); }
+        }
+
+        .heart-btn:hover {
+            transform: rotate(-45deg) scale(1.2);
+            box-shadow: 0 0 30px rgba(255, 100, 150, 0.8);
+        }
+
+        p {
+            margin-top: 25px;
+            font-size: 16px;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 10px 20px;
+            border-radius: 15px;
+            z-index: 2;
+            animation: fadeInUp 3s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* قلوب الخلفية */
+        .heart {
+            position: fixed;
+            bottom: -10px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 20px;
+            animation: floatUp 6s linear infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
+        }
+
+        @media (max-width: 600px) {
+            .heart-btn {
+                width: 80px;
+                height: 70px;
+            }
+            .heart-btn::before,
+            .heart-btn::after {
+                width: 80px;
+                height: 70px;
+            }
+            p {
+                font-size: 14px;
+                padding: 8px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- زر القلب -->
+    <div class="heart-btn" onclick="window.location.href='page3.html'"></div>
+
+    <p>هلا بالحب نورتي الموقع، تراه موقع لك انتي بس 🤫
+        دحين ابيك تضغطي عليك
+    </p>
+
+    <!-- القلوب المتحركة -->
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.textContent = ['❤','💖','💕','💞'][Math.floor(Math.random()*4)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = (16 + Math.random() * 24) + 'px';
+            heart.style.animationDuration = (5 + Math.random() * 4) + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 9000);
+        }
+        setInterval(createHeart, 800);
+    </script>
+</body>
+</html>
